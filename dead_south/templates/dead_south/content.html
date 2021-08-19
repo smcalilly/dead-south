@@ -1,0 +1,19 @@
+{% extends "dead_south/base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class='container grid md:grid-cols-3 sm:grid-cols-1'>
+  {% for article in object_list %}
+    <div class=''>
+      <article class='m-4'>
+        <h2 class='text-xl font-bold'>{{ article.title }}</h2>
+        {% for value in article.output_text %}
+          <p class='text-xs py-2'>{{ value }}</p>
+        {% endfor %}
+        <a target="_blank" href="{{ article.source_url }}" class='text-red-400'>Read more ></a>
+    </article>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

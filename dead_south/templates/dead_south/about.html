@@ -1,0 +1,62 @@
+{% extends "dead_south/base.html" %}
+
+{% block title %}about{% endblock %}
+
+{% block body %}
+    <article class='mx-auto grid grid-cols-2 m-2'>
+       <div>
+        <p>content media spun into a web of computers</p>
+        <br>
+        <code>
+         DATE:=$(shell date '+%Y-%m-%d')
+ 
+         all : output/$(DATE).json
+             docker-compose run --rm app python manage.py save_the_zobot --file $<
+         
+         output/$(DATE).json : intermediate/articles/article_text/$(DATE).json
+             mkdir -p $(dir $@)
+             python3 scripts/zobot.py $< > $@
+         
+         intermediate/articles/article_text/%.json : intermediate/articles/raw_html/%.json
+             mkdir -p $(dir $@)
+             python3 scripts/article_text.py $< > $@
+         
+         intermediate/articles/raw_html/%.json : intermediate/articles/links/%.json
+             mkdir -p $(dir $@)
+             python3 scripts/get_html.py $< > $@
+         
+         intermediate/articles/links/%.json : intermediate/tweets/content/%.json
+             mkdir -p $(dir $@)
+             python3 scripts/get_links.py $< > $@
+         
+         intermediate/tweets/content/%.json : intermediate/tweets/json/%.json
+             mkdir -p $(dir $@)
+             cat $< | jq '.[].content' | jq -s '.'  > $@
+         
+         intermediate/tweets/json/$(DATE).json : 
+             mkdir -p $(dir $@)
+             snscrape --jsonl --since $(DATE) twitter-user Southern_Living | jq -s '.' > $@
+        </code>
+         <a href="{% url 'content' %}" class='text-red-400'>Read more ></a>
+       </div>
+        
+        <div class='m-12'>
+        <p>ok ok ok</p>
+       <p>what the fuck is this?</p>
+       <p>this is a machine that scrapes articles from major media websites</p>
+       <p>(those content factories, in the business of clicks)</p>
+       <p>the computer machine takes the scraped articles and ingests them!</p>
+       <p>it digests them into new words, a yarn of machines.</p>
+       <p>that machine does statistics to create language. or something like it.</p>
+       <p>we aren't sure.</p>
+       <p>it is called gpt-3.</p>
+       <p>we aren't sure of anything, really, except,</p>
+       <p>the words on this here page are written by a human.</p>
+       <p>the words on <a href="{% url 'content' %}" class='text-red-300'>content</a> are fake media pieces.</p>
+       <p>the content words update once a day.</p>
+       <p>this is satire and criticism.</p>
+       <p>the south is <a href='https://en.wikipedia.org/wiki/Lost_Cause_of_the_Confederacy' target='_blank' class='text-red-300'>dead!</a></p>
+        </div>
+    </article>
+
+{% endblock %}
