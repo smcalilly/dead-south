@@ -1,5 +1,6 @@
 import sys
 import json
+import os
 import re
 import requests
 import lxml.html
@@ -7,9 +8,8 @@ import openai
 
 
 def get_article_summary(text, max_tokens):
-    api_key = ''
-    openai.api_key = api_key
-    openai.organization = ''
+    openai.api_key = os.environ.get('OPENAI_API_SECRET_KEY')
+    openai.organization = os.environ.get('OPENAI_ORGANIZATION', None)
 
     response = openai.Completion.create(
         engine="davinci",
