@@ -10,3 +10,4 @@ class Article(models.Model):
         indexes = [
             models.Index(fields=['source_url']),
         ]
+        ordering = ['-pk']

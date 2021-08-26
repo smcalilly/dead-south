@@ -6,6 +6,7 @@ from .models import Article
 class Content(ListView):
     template_name = 'dead_south/content.html'
     model = Article
+    ordering = ['-pk']
 
 class Home(TemplateView):
     template_name = 'dead_south/home.html'
