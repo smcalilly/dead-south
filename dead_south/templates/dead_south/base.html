@@ -35,23 +35,23 @@
 
   <body>
     <nav class='bg-green-300'>
-      <h1 class='text-8xl'>
+      <h1 class='md:text-8xl text-6xl'>
         <a href="{% url 'home' %}">dead south</a>
       </h1>
     </nav>
 
-    <div>
+    <div class='m-2'>
       {% block body %}{% endblock %}
     </div>
 
     <footer>
       <div class='flex justify-between'>
-        <div class='flex w-1/4 justify-between'>
-          <a href="{% url 'home' %}"><h3 class='text-2xl text-green-300'>dead south</h3></a>
-          <a href="{% url 'about' %}"><h3 class='text-2xl text-red-300'>about</h3></a>
+        <div class='flex md:w-1/4 justify-between'>
+          <a href="{% url 'home' %}"><h3 class='text-2xl text-green-300 m-2'>dead south</h3></a>
+          <a href="{% url 'about' %}"><h3 class='text-2xl text-red-300 m-2'>about</h3></a>
         </div>
         <div>
-          <a href="{% url 'content' %}"><h3 class='text-2xl text-red-300'>content</h3></a>
+          <a href="{% url 'content' %}"><h3 class='text-2xl text-red-300 m-2'>content</h3></a>
         </div>
         <!-- <div>
           <a href="{% url 'help' %}"><h3 class='text-2xl text-red-300'>help!</h3></a>
