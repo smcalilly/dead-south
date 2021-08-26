@@ -67,6 +67,22 @@
            <p>if you have some poetry to add or some good writing that touches on that theme, <a href='mailto:smcalilly@gmail.com' class='text-red-300'>hit us up</a>! we could find a place for it.</p>
            <p>now i will go back to making something useful to society.</p>
         </div>
+
+        <div class='m-12'>
+            <code>
+                def get_article_summary(text, max_tokens):
+                    response = openai.Completion.create(
+                        engine="davinci",
+                        prompt=text,
+                        max_tokens=max_tokens,
+                        top_p=1.0,
+                        frequency_penalty=0.0,
+                        presence_penalty=0.0,
+                        stop=["\n"])
+
+                    return response
+            </code>
+        </div>
     </article>
 
 {% endblock %}
