@@ -8,8 +8,9 @@ import openai
 
 
 def get_article_summary(text, max_tokens):
-    openai.api_key = os.environ.get('OPENAI_API_SECRET_KEY')
-    openai.organization = os.environ.get('OPENAI_ORGANIZATION', None)
+    api_key = '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'
+    openai.api_key = api_key
+    openai.organization = 'org-baVkaGFpBkbP2PQi9OmRwuIk'
 
     response = openai.Completion.create(
         engine="davinci",
@@ -42,7 +43,7 @@ if __name__ == '__main__':
             'source_text': article['text'],
             'zobot': output_text,
             'source_title': article['title'][0],
-            'output_tile': title['choices'][0]['text']
+            'output_tile': title['choices'][0]['text'].replace('| Southern Living', '')
         })
 
     json.dump(output, sys.stdout, indent=4)

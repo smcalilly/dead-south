@@ -11,7 +11,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         filename = kwargs.get('file')
-        with open(f'data/{filename}') as f:
+        with open(filename) as f:
             data = json.load(f)
 
         for article in data:

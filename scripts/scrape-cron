@@ -1,0 +1,1 @@
+00 16 * * * make all >> /var/log/cron.log 2>&1

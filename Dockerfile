@@ -22,7 +22,7 @@ RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
 #
 # Read more on Dockerfile best practices at the source:
 # https://docs.docker.com/develop/develop-images/dockerfile_best-practices
-RUN apt-get install -y --no-install-recommends postgresql-client nodejs
+RUN apt-get install -y --no-install-recommends postgresql-client nodejs jq cron
 
 # Inside the container, create an app directory and switch into it
 RUN mkdir /app
@@ -44,6 +44,14 @@ RUN npm install
 # Copy the contents of the current host directory (i.e., our app code) into
 # the container.
 COPY . /app
+
+# setup cron job to get new content each day
+# thanks: https://stackoverflow.com/a/37458519
+COPY ./scripts/scrape-cron /etc/cron.d/scrape-cron
+RUN chmod 0644 /etc/cron.d/scrape-cron
+RUN crontab /etc/cron.d/scrape-cron
+RUN touch /var/log/cron.log
+CMD cron && tail -f /var/log/cron.log
 
 # Add a bogus env var for the Django secret key in order to allow us to run
 # the 'collectstatic' management command

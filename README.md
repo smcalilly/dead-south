@@ -1,29 +1,17 @@
 # dead south
+[Dead South](https://www.dead-south.com) takes content from southernliving.com and summarizes it with OpenAI GPT-3. It's funny.
 
-## Developing
-
-Development requires a local installation of [Docker](https://docs.docker.com/install/)
-and [Docker Compose](https://docs.docker.com/compose/install/).
-
-Build application containers:
-
-```
+## build
+```bash
 docker-compose build
 ```
 
-Run the app:
-
+## run
+```bash
+docker-compose run
 ```
-docker-compose up
-```
 
-The app will be available at http://localhost:8000. The database will be exposed
-on port 32001.
-
-### Running tests
-
-Run tests with Docker Compose:
-
-```
-docker-compose -f docker-compose.yml -f tests/docker-compose.yml run --rm app
+## get and save new content
+```bash
+docker-compose run app make all
 ```
