@@ -8,9 +8,9 @@ import openai
 
 
 def get_article_summary(text, max_tokens):
-    api_key = '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'
+    api_key = ''
     openai.api_key = api_key
-    openai.organization = 'org-baVkaGFpBkbP2PQi9OmRwuIk'
+    openai.organization = ''
 
     response = openai.Completion.create(
         engine="davinci",
